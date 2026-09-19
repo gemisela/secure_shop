@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="login auth-card">
+    <div>
+        <i class="fa-solid fa-shield-halved logo"></i>
+        <h1>Connexion</h1>
+        <p>Accédez à votre compte pour continuer.</p>
+
+        {% if form.errors %}
+            <div class="form-alert">
+                <p>Adresse e-mail ou mot de passe incorrect.</p>
+            </div>
+        {% endif %}
+
+        <form method="post" class="auth-form">
+            {% csrf_token %}
+            <div class="field">
+                <label for="{{ form.username.id_for_label }}">
+                    <i class="fa-solid fa-envelope"></i> Adresse e-mail
+                </label>
+                <input type="email" name="{{ form.username.html_name }}"
+                       id="{{ form.username.id_for_label }}"
+                       value="{{ form.username.value|default:'' }}"
+                       autocomplete="email"
+                       placeholder="exemple@email.com" required>
+            </div>
+
+            <div class="field">
+                <label for="{{ form.password.id_for_label }}">
+                    <i class="fa-solid fa-lock"></i> Mot de passe
+                </label>
+                <input type="password" name="{{ form.password.html_name }}"
+                       id="{{ form.password.id_for_label }}"
+                       autocomplete="current-password"
+                       placeholder="Votre mot de passe" required>
+            </div>
+
+            {% if next %}
+                <input type="hidden" name="next" value="{{ next }}">
+            {% endif %}
+
+            <button class="btn wide" type="submit">
+                <i class="fa-solid fa-right-to-bracket"></i> Se connecter
+            </button>
+        </form>
+
+        <div class="auth-switch">
+            <span>Vous n'avez pas encore de compte ?</span>
+            <a href="{% url 'register' %}">Créer un compte</a>
+        </div>
+    </div>
+
+    <aside>
+        <i class="fa-solid fa-shield-halved"></i>
+        <h2>Votre sécurité, notre priorité</h2>
+        <p><i class="fa-solid fa-circle-check"></i> Transactions protégées</p>
+        <p><i class="fa-solid fa-circle-check"></i> Données contrôlées</p>
+        <p><i class="fa-solid fa-circle-check"></i> Anti-rejeu avec Nonce</p>
+    </aside>
+</div>
+{% endblock %}

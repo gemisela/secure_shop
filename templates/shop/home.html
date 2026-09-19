@@ -1,0 +1,43 @@
+
+{% extends 'base.html' %}{% block content %}
+{% load static %}
+<section class="hero">
+    <div><span class="eyebrow"><i class="fa-solid fa-lock"></i> TRANSACTIONS PROTÉGÉES</span>
+        <h1>Achetez en toute <em>sécurité</em></h1>
+        <!-- <p>Une démonstration e-commerce moderne intégrant HMAC-SHA-256, nonce anti-rejeu, sessions sécurisées et HTTPS.</p> -->
+        <a class="btn big" href="/produits/">
+            Découvrir nos produits
+            <i class="fa-solid fa-arrow-right"></i>
+        </a>
+    </div>
+    <!-- <div class="hero-card">
+        <i class="fa-solid fa-laptop-code"></i>
+        <i class="fa-solid fa-shield-halved shield"></i>
+    </div> -->
+    <div class="hero-card hero-image-card">
+        <img src="{% static 'images/SECURE1.png' %}" width="450px" alt="Achat en ligne sécurisé" class="hero-image">
+    </div>
+</section>
+<section class="features">
+    <article>
+        <i class="fa-solid fa-credit-card"></i>
+        <h3>Paiement sécurisé</h3>
+        <p>Transaction simulée et contrôlée.</p>
+    </article>
+    <article>
+        <i class="fa-solid fa-fingerprint"></i>
+        <h3>Intégrité HMAC</h3>
+        <p>HMAC-SHA-256 vérifie les données.</p>
+    </article>
+    <article>
+        <i class="fa-solid fa-rotate-left"></i>
+        <h3>Anti-rejeu</h3>
+        <p>Nonce unique pour chaque transaction.</p>
+    </article>
+    <article>
+        <i class="fa-solid fa-file-invoice"></i>
+        <h3>Reçu numérique</h3>
+        <p>Preuve claire après validation.</p>
+    </article>
+</section>
+{% endblock %}

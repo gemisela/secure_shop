@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="login auth-card">
+    <div>
+        <i class="fa-solid fa-user-plus logo"></i>
+        <h1>Créer un compte</h1>
+        <p>Créez votre espace SecureShop pour accéder au paiement sécurisé.</p>
+
+        <form method="post" novalidate class="auth-form">
+            {% csrf_token %}
+
+            {% if form.non_field_errors %}
+                <div class="form-alert">
+                    {% for error in form.non_field_errors %}
+                        <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+
+            <div class="form-grid">
+                <div class="field">
+                    <label for="{{ form.first_name.id_for_label }}">
+                        <i class="fa-solid fa-user"></i> Prénom
+                    </label>
+                    {{ form.first_name }}
+                    {% for error in form.first_name.errors %}
+                        <small class="field-error">{{ error }}</small>
+                    {% endfor %}
+                </div>
+
+                <div class="field">
+                    <label for="{{ form.last_name.id_for_label }}">
+                        <i class="fa-solid fa-user"></i> Nom
+                    </label>
+                    {{ form.last_name }}
+                    {% for error in form.last_name.errors %}
+                        <small class="field-error">{{ error }}</small>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="field">
+                <label for="{{ form.email.id_for_label }}">
+                    <i class="fa-solid fa-envelope"></i> Adresse e-mail
+                </label>
+                {{ form.email }}
+                {% for error in form.email.errors %}
+                    <small class="field-error">{{ error }}</small>
+                {% endfor %}
+            </div>
+
+            <div class="field">
+                <label for="{{ form.password1.id_for_label }}">
+                    <i class="fa-solid fa-lock"></i> Mot de passe
+                </label>
+                {{ form.password1 }}
+                {% if form.password1.help_text %}
+                    <div class="help-text">{{ form.password1.help_text|safe }}</div>
+                {% endif %}
+                {% for error in form.password1.errors %}
+                    <small class="field-error">{{ error }}</small>
+                {% endfor %}
+            </div>
+
+            <div class="field">
+                <label for="{{ form.password2.id_for_label }}">
+                    <i class="fa-solid fa-shield-halved"></i> Confirmer le mot de passe
+                </label>
+                {{ form.password2 }}
+                {% for error in form.password2.errors %}
+                    <small class="field-error">{{ error }}</small>
+                {% endfor %}
+            </div>
+
+            <button class="btn wide" type="submit">
+                <i class="fa-solid fa-user-check"></i> Créer mon compte
+            </button>
+        </form>
+
+        <div class="auth-switch">
+            <span>Vous avez déjà un compte ?</span>
+            <a href="{% url 'login' %}">Se connecter</a>
+        </div>
+    </div>
+
+    <aside>
+        <i class="fa-solid fa-fingerprint"></i>
+        <h2>Un compte conçu pour la sécurité</h2>
+        <p><i class="fa-solid fa-circle-check"></i> Mot de passe haché par Django</p>
+        <p><i class="fa-solid fa-circle-check"></i> Session protégée</p>
+        <p><i class="fa-solid fa-circle-check"></i> Protection CSRF</p>
+        <p><i class="fa-solid fa-circle-check"></i> Paiements signés par HMAC-SHA-256</p>
+    </aside>
+</div>
+{% endblock %}
